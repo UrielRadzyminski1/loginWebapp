@@ -15,16 +15,15 @@ class AuthController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:55',
             'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required'
         ]);
-
         $validatedData['password'] = bcrypt($request->password);
 
         $user = User::create($validatedData);
-
+       
         $accessToken = $user->createToken('authToken')->accessToken;
 
-        //return response([ 'user' => $user, 'access_token' => $accessToken]);
+        return (response([ 'user' => $user, 'access_token' => $accessToken]));
     }
 
     public function login(Request $request)
@@ -42,5 +41,11 @@ class AuthController extends Controller
 
         return response(['user' => auth()->user(), 'access_token' => $accessToken]);
 
+    }
+
+    public function user(Request $request)
+    {
+
+        return response()->json($request->user());
     }
 }

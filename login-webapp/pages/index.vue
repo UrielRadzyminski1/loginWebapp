@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Axios from 'axios';
 export default {
+  middleware: 'auth',
   data() {
     return {
       postData:''
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     onSubmit (){
-      Axios.post('test/create', {
+      this.$axios.post('test/create', {
         data: this.postData,
       })
       .then(function (response) {
