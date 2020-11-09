@@ -1,25 +1,24 @@
 <template>
-<div>
-  <User-Navbar></User-Navbar>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        login-webapp
-      </h1>
-      <form v-on:submit.prevent="onSubmit" method="POST" action="localhost:8000/api/test/create" accept-charset="UTF-8" id="mainForm">
-        <label for="data">Data</label>
-        <input v-model="postData" type="text" name="data" id="data">
-        <input  type="submit" value="Submit!">
-      </form>
+  <div>
+    <div class="container">
+      <div>
+        <Logo />
+        <h1 class="title">
+          login-webapp
+        </h1>
+        <form v-on:submit.prevent="onSubmit" method="POST" action="localhost:8000/api/test/create" accept-charset="UTF-8" id="mainForm">
+          <label for="data">Data</label>
+          <input v-model="postData" type="text" name="data" id="data">
+          <input  type="submit" value="Submit!">
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: 'logged',
   data() {
     return {
       postData:''
@@ -31,7 +30,7 @@ export default {
         data: this.postData,
       })
       .then(function (response) {
-        console.log(response);
+        this.$router.push({path: '/'})
       })
       .catch(function (error) {
         console.log(error);
