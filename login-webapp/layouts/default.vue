@@ -1,9 +1,17 @@
 <template>
   <div>
+    <UserNavbar />
     <Nuxt />
   </div>
 </template>
-
+<script>
+import UserNavbar from '../components/UserNavbar.vue'
+export default {
+  components: {
+    UserNavbar,
+  }
+}
+</script>
 <style>
 html {
   font-family:
