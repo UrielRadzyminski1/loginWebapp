@@ -1,8 +1,8 @@
 <template>
   <div class="justify-between fixed flex bg-green-400 w-full">
       <v-btn text to="/">Home!</v-btn>
-      <div v-if="$auth.loggedIn">
-        Hola {{$auth.user.name}}
+      <div v-if="$auth.loggedIn" class="inline-flex w-auto">
+        <user-tooltip text />
         <v-btn text @click="logout()">Logout</v-btn>
       </div>
       <div v-else>
@@ -12,7 +12,11 @@
   </div>
 </template>
 <script>
+import UserTooltip from './UserTooltip.vue'
 export default {
+  components: {
+    UserTooltip,
+  },
   methods: {
     logout(){
       this.$axios.post('logout')

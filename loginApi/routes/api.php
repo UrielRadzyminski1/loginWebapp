@@ -26,6 +26,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
+Route::get('/{user}/articles', [ArticleController::class, 'getByUser']);
 /* Route::get('/user', [AuthController::class, 'user']); */
 
 Route::post('test/create', [TestunitController::class, 'store']);
