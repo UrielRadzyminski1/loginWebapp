@@ -2,7 +2,7 @@
   <div>
     <v-app>
       <UserNavbar />
-      <Nuxt />
+      <Nuxt class="p-40 mt-10" />
     </v-app>
   </div>
 </template>

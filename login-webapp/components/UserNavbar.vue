@@ -22,7 +22,7 @@ export default {
       this.$axios.post('logout')
       .then((response) => {
         console.log(response);
-        this.$router.push({path: '/'})
+        this.$router.go({path: '/login'})
       })
       .catch((error) => {
         console.log(error);

@@ -1,9 +1,9 @@
 <template>
     <div class="pt-20">
         <ul>
-            <li v-for="article in articles" :key="article.id">
-                {{article.title}}
-            </li>
+            <ul>
+              <li v-for="article in articles" :key="article.id"><nuxt-link :to="'/articles/'+article.id">{{ article.title }}</nuxt-link></li>
+            </ul>
         </ul>
 
     </div>
@@ -19,7 +19,7 @@ export default {
     }
   },
   async fetch() {
-       this.$store.dispatch('articles/getUserArticles', this.$auth.user.id);
+    this.$store.dispatch('articles/getUserArticles', this.$auth.user.id);
   }
 }
 </script>
