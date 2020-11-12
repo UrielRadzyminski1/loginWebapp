@@ -17,16 +17,40 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
+
+
+//User routes
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user();
+    $user->scope = $user->roles->pluck('name')->toArray();
+    return $user;
 });
 
 Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/articles', [ArticleController::class, 'index']);
+//End user routes
+
+
+
+
+//articles routes
+
+//Get article list:
+Route::middleware('auth:api')->get('/articles', [ArticleController::class, 'index']);
+
+//Get individual article information
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
+
+//Submit new article
+Route::middleware('permission:create articles')->post('/articles', [ArticleController::class, 'store']);
+
+//Get articles by user
 Route::get('/{user}/articles', [ArticleController::class, 'getByUser']);
 /* Route::get('/user', [AuthController::class, 'user']); */
+//End articles routes
 
-Route::post('test/create', [TestunitController::class, 'store']);
+
+
+
+/* Route::post('test/create', [TestunitController::class, 'store']); */

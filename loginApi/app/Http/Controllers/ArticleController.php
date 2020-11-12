@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,9 +35,18 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        //
+        $wordCount = str_word_count($request->content);
+        Article::create([
+            'title' =>  $request->title,
+            'content' =>  $request->content,
+            'user_id' =>  $request->user()->id,
+            'word_count' => $wordCount,
+            'read_time' =>  intdiv($wordCount, 200),
+        ]);
+
+
     }
 
     /**
