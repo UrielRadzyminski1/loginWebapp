@@ -13,12 +13,18 @@
 <script>
 
 export default {
+  data() {
+    return {
+      loading:true,
+    }
+  },
   computed: {
     articles () {
       return this.$store.state.articles.articles
     }
   },
   async fetch() {
+
     this.$store.dispatch('articles/getUserArticles', this.$auth.user.id);
   }
 }

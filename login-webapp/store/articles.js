@@ -1,5 +1,5 @@
 export const state = () => ({
-    articles: [],
+    allArticles: [],
     test:'testData'
 })
 
@@ -14,5 +14,11 @@ export const actions = {
         .then( (response)=>{
             context.commit('setArticles',response)
         })
-      },
+    },
+    async getAllArticles(context) {
+    this.$axios.$get('/articles/')
+    .then( (response)=>{
+        context.commit('setArticles',response)
+    })
+    },
 }

@@ -3,7 +3,7 @@
       <v-btn text to="/">Home!</v-btn>
       <div v-if="$auth.loggedIn" class="inline-flex w-auto">
         <user-tooltip text />
-        <v-btn text @click="$router.push({path: '/articles/new'})" v-if="$auth.hasScope('writer')">New article</v-btn>
+        <v-btn text @click="$router.push({path: '/articles/new'})" v-if="$auth.hasScope('create articles')">New article</v-btn>
         <v-btn text @click="logout()">Logout</v-btn>
       </div>
       <div v-else>

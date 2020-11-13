@@ -22,7 +22,7 @@ use App\Http\Controllers\ArticleController;
 //User routes
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     $user = $request->user();
-    $user->scope = $user->roles->pluck('name')->toArray();
+    $user->scope = $user->permissions->pluck('name')->toArray();
     return $user;
 });
 
@@ -37,7 +37,7 @@ Route::post('/login', [AuthController::class, 'login']);
 //articles routes
 
 //Get article list:
-Route::middleware('auth:api')->get('/articles', [ArticleController::class, 'index']);
+Route::get('/articles', [ArticleController::class, 'index']);
 
 //Get individual article information
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
