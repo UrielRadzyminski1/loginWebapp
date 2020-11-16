@@ -1,11 +1,15 @@
 <template>
   <div class="pt-10">
-    <div >
-      <h1>Latest articles</h1>
-      <ul>
-        <li v-for="article in articles" :key="article.id"><nuxt-link :to="'/articles/'+article.id">{{ article.title }}</nuxt-link></li>
+    <div>
+      <h1>Latest articless</h1>
+      <h2>Current page: {{articles.current_page}}</h2>
+      <ul >
+        <li v-for="article in articles.data" :key="article.id"><nuxt-link :to="'/articles/'+article.id">{{ article.title }}</nuxt-link></li>
       </ul>
-      <button>Refresh</button>
+      <div class="flex">
+      <v-btn @click="previousPage">Previous Page</v-btn>
+      <v-btn @click="nextPage">Next Page</v-btn>
+    </div>
     </div>
   </div>
 </template>
@@ -15,17 +19,22 @@ export default {
     return {
     }
   },
-  async asyncData(context) {
-    const articles = await  context.$axios.$get('articles');
-    return {articles}; // Same as return  { facts: facts }
-/* 
-      app.$axios.get('articles').then( (response)=>{
-        console.log(response.data);
-        {articles : response.data}
-      }) */
+  computed: {
+    articles () {
+      return this.$store.state.articles.articles
+    }
   },
+  methods: {
+    nextPage(){
+      this.$store.dispatch('articles/getNextPage');
+    },
+    previousPage(){
+      this.$store.dispatch('articles/getPreviousPage');
+    }
+  },
+
   mounted(){
-    
+    this.$store.dispatch('articles/getAllArticles',3);
   }
 }
 </script>

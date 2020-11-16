@@ -1,7 +1,7 @@
 <template>
   <div class="pt-10">
       <h1 class="my-4 ">{{articles.title}}</h1>
-      <v-btn v-if="canEdit">Edit</v-btn>
+      <nuxt-link :to="'/articles/'+articles.id +'/edit/'" ><v-btn v-if="canEdit">Edit</v-btn></nuxt-link>
       <p>{{articles.content}}</p>
       <button >Refresh</button>
 
@@ -18,7 +18,9 @@ export default {
   computed: {
     canEdit(){
       if(this.$auth.loggedIn){
-         return (this.article.user_id == this.$auth.user.id)||(this.$auth.hasScope('edit articles'));
+        console.log(this.article.user_id);
+        console.log(this.$auth.user.id);
+         return (this.articles.user_id == this.$auth.user.id)||(this.$auth.hasScope('edit articles'));
       } else {
         return false;
       }
@@ -28,9 +30,7 @@ export default {
 
 
   async asyncData(context) {
-    console.log(context.params.id);
     const articles = await context.$axios.$get('articles/'+context.params.id);
-    console.log(articles);
     return {articles};
   }
 

@@ -45,9 +45,20 @@ Route::get('/articles/{article}', [ArticleController::class, 'show']);
 //Submit new article
 Route::middleware('permission:create articles')->post('/articles', [ArticleController::class, 'store']);
 
+//Edit article
+Route::middleware('auth:api')->patch('/articles/{article}', [ArticleController::class, 'update']);
+
 //Get articles by user
 Route::get('/{user}/articles', [ArticleController::class, 'getByUser']);
 /* Route::get('/user', [AuthController::class, 'user']); */
+
+//Get IDs of the articles of a certain user
+Route::middleware('auth:api')->get('/user/articles/id', function (Request $request) {
+    $user = $request->user();
+    $userArticles = $user->articles->pluck('id')->toArray();
+    return $userArticles;
+});
+
 //End articles routes
 
 

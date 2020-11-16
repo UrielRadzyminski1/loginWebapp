@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return(response(Article::all()));
+        return(response(Article::orderBy('created_at', 'desc')->paginate(request()->perPage)));
     }
 
     /**
@@ -78,9 +79,15 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        $wordCount = str_word_count($request->content);
+        $article->title =  $request->title;
+        $article->content =  $request->content;
+        $article->word_count =$wordCount;
+        $article->read_time = intdiv($wordCount, 200);
+        $article->save();
+        return response('Ok');
     }
 
     /**
@@ -96,6 +103,6 @@ class ArticleController extends Controller
 
     public function getByUser(User $user)
     {
-        return response($user->articles);
+        return response($user->articles()->paginate(request()->perPage));
     }
 }
