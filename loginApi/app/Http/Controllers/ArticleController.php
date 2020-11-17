@@ -17,7 +17,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return(response(Article::orderBy('created_at', 'desc')->paginate(request()->perPage)));
+        $articles = Article::orderBy('created_at', 'desc')->paginate(request()->perPage);
+        foreach ($articles as $article) {
+            $article->user;
+        }
+        return(response($articles));
     }
 
     /**

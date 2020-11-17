@@ -20,6 +20,8 @@ export const actions = {
             context.commit('setPerPage',perPage)
         })
     },
+
+
     async getAllArticles(context, perPage = 5) {
     console.log('Getting articles');
     this.$axios.$get('/articles'+'?perPage='+perPage)
@@ -32,6 +34,8 @@ export const actions = {
         console.log(error);
     })
     },
+
+
     async getNextPage(context){
         console.log(context.state.articles);
         const nextPage = context.state.articles.links[context.state.articles.links.length -1].url;
@@ -42,6 +46,8 @@ export const actions = {
             })
         }
     },
+
+
     async getPreviousPage(context){
         const previousPage = context.state.articles.links[0].url;
         if (previousPage!=null) {
@@ -50,5 +56,17 @@ export const actions = {
                 context.commit('setArticles',response)
             })
         }
+    },
+
+    
+    async getByPage(context, page){
+        if(page>=0 && page<=context.state.articles.last_page){
+            const pageToGet = context.state.articles.links[page].url;
+            this.$axios.$get(pageToGet+'&perPage='+context.state.perPage)
+            .then( (response)=>{
+                context.commit('setArticles',response)
+            })
+        }
+        
     }
 }

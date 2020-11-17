@@ -1,21 +1,31 @@
 <template>
-    <div class="pt-20">
+    <div v-if="loading">
+      <p>Loading</p>
+    </div>
+    <div v-else>
+      <div class="pt-20">
         <ul>
             <ul>
               <li v-for="article in articles.data" :key="article.id"><nuxt-link :to="'/articles/'+article.id">{{ article.title }}</nuxt-link></li>
             </ul>
         </ul>
-    <div class="flex">
-      <v-btn @click="previousPage">Previous Page</v-btn>
-      <v-btn @click="nextPage">Next Page</v-btn>
+      <v-pagination
+      :value="page"
+      :length="articles.last_page"
+      :total-visible="9"
+      v-on:input="clickCallback($event)"
+      ></v-pagination>
     </div>
+
     </div>
+    
   
 </template>
 
 <script>
 
 export default {
+  middleware:'logged',
   data() {
     return {
       loading:true,
@@ -24,6 +34,9 @@ export default {
   computed: {
     articles () {
       return this.$store.state.articles.articles
+    },
+    page(){
+      return this.$store.state.articles.articles.current_page
     }
   },
   methods: {
@@ -32,11 +45,15 @@ export default {
     },
     previousPage(){
       this.$store.dispatch('articles/getPreviousPage');
+    },
+    clickCallback(pageNumber){
+      this.$store.dispatch('articles/getByPage',pageNumber);
     }
   },
-  mounted() {
+  async mounted() {
 
-    this.$store.dispatch('articles/getUserArticles', this.$auth.user.id);
+    await this.$store.dispatch('articles/getUserArticles', this.$auth.user.id);
+    this.loading =false;
   }
 }
 </script>

@@ -10,3 +10,11 @@ h2{
 .frontpageArticle:hover{
   @apply bg-gray-300;
 }
+
+.pagination{
+  @apply flex flex-row;
+}
+
+.pagination *{
+  @apply mx-1;
+}

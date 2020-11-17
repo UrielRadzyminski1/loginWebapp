@@ -1,6 +1,10 @@
 <template>
   <div class="justify-between fixed flex bg-green-400 w-full">
-      <v-btn text to="/">Home!</v-btn>
+      
+      <div>
+        <v-btn text to="/">Home!</v-btn>
+        <v-btn text to="/articles">All articles</v-btn>
+      </div>
       <div v-if="$auth.loggedIn" class="inline-flex w-auto">
         <user-tooltip text />
         <v-btn text @click="$router.push({path: '/articles/new'})" v-if="$auth.hasScope('create articles')">New article</v-btn>

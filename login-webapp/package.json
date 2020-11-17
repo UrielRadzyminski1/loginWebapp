@@ -13,7 +13,8 @@
     "@nuxtjs/axios": "^5.12.2",
     "core-js": "^3.6.5",
     "nanoid": "^2.1.11",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^3.1.0",
