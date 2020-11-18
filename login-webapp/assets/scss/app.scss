@@ -1,20 +1,64 @@
 h1{
-  @apply text-4xl;
+  @apply text-4xl text-black;
 }
 h2{
-  @apply text-xl;
+  @apply text-2xl text-black;
+}
+h3{
+  @apply text-xl text-black;
+}
+h4{
+  @apply text-lg text-black;
+}
+p{
+  @apply text-black text-lg;
+}
+span{
+  @apply text-black;
+}
+.userArticleLink{
+  @apply text-black;
 }
 .frontpageArticle{
-  @apply p-10 w-1/2;
+  @apply p-10 ;
 }
 .frontpageArticle:hover{
   @apply bg-gray-300;
 }
-
-.pagination{
-  @apply flex flex-row;
+.button{
+  @apply p-2;
 }
 
-.pagination *{
-  @apply mx-1;
+.button:hover{
+  @apply bg-black bg-opacity-25 cursor-pointer;
+}
+
+.dropdownItem{
+  @apply px-2 py-1;
+}
+
+.dropdownItem:hover{
+  @apply bg-black bg-opacity-25 cursor-pointer;
+}
+
+.pagination{
+  @apply flex;
+}
+.paginationActive{
+  @apply bg-green-400;
+}
+.paginationNumber, .paginationPrev, .paginationNext{
+  @apply mx-2 px-2 rounded shadow;
+}
+
+.paginationBreak{
+  @apply shadow-none cursor-default;
+}
+
+.paginationNumber:hover, .paginationPrev:hover, .paginationNext:hover{
+  @apply bg-gray-400 bg-opacity-25 cursor-pointer;
+}
+
+.paginationBreak:hover{
+  @apply bg-transparent cursor-auto;
 }

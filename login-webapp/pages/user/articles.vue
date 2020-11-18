@@ -1,23 +1,30 @@
 <template>
-    <div v-if="loading">
-      <p>Loading</p>
-    </div>
+<div class="flex flex-col items-center">
+  <div class="xl:w-1/2 w-3/4">
+    <p v-if="$fetchState.pending">Fetching articles...</p>
+    <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
       <div class="pt-20">
         <ul>
-            <ul>
-              <li v-for="article in articles.data" :key="article.id"><nuxt-link :to="'/articles/'+article.id">{{ article.title }}</nuxt-link></li>
-            </ul>
+          <li v-for="article in articles.data" :key="article.id"><nuxt-link class="userArticleLink" :to="'/articles/'+article.id">
+          <h3>{{ article.title }}</h3></nuxt-link></li>
         </ul>
-      <v-pagination
-      :value="page"
-      :length="articles.last_page"
-      :total-visible="9"
-      v-on:input="clickCallback($event)"
-      ></v-pagination>
+        <paginate
+          :container-class="'pagination'"
+          :page-class="'paginationNumber'"
+          :prev-class="'paginationPrev'"
+          :next-class="'paginationNext'"
+          :break-view-class="'paginationBreak'"
+          :break-view-link-class="'paginationBreak'"
+          :active-class="'paginationActive'"
+          :value="page"
+          :page-count="articles.last_page"
+          :click-handler="clickCallback"
+          ></paginate>
+      </div>
     </div>
-
-    </div>
+  </div>
+</div>
     
   
 </template>
@@ -50,10 +57,11 @@ export default {
       this.$store.dispatch('articles/getByPage',pageNumber);
     }
   },
-  async mounted() {
+  async fetch() {
 
     await this.$store.dispatch('articles/getUserArticles', this.$auth.user.id);
     this.loading =false;
-  }
+  },
+  fetchOnServer: false,
 }
 </script>

@@ -1,39 +1,34 @@
 <template>
-  <div class="text-center">
-    <v-menu offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="black"
-          dark
-          text
-          v-bind="attrs"
-          v-on="on"
-        >
+  <div @mouseover="showMenu = true"
+    @mouseleave="showMenu = false" class="text-center relative">
+      <div @click="toggleMenu" class="button flex items-center h-full">
           {{$auth.user.name}}
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item
+      </div>
+      <ul v-if="showMenu" class="absolute right-0 bg-green-200 w-32">
+        <li
+          class="dropdownItem"
           v-for="(item, index) in items"
           :key="index" :to="item.link"
         >
-                <v-list-item-title>
-                {{ item.title }}
-                </v-list-item-title>
-
-        </v-list-item>
-      </v-list>
-    </v-menu>
+        <nuxt-link :to="item.link">{{ item.title }}</nuxt-link>
+        </li>
+      </ul>
   </div>
 </template>
 <script>
 export default {
     data: () => ({
+      showMenu:false,
       items: [
         { title: 'Profile', link :'/user/profile' },
         { title: 'My articles', link :'/user/articles' },
         { title: 'Settings', link :'/user/settings' },
       ],
     }),
+    methods: {
+      toggleMenu(){
+        this.showMenu = !this.showMenu;
+      }
+    },
   }
 </script>

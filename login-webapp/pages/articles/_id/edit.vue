@@ -1,33 +1,31 @@
 <template>
   <div class="pt-10">
     <h1>Edit article</h1>
-    <v-form
-      ref="form"
-    >
-        <v-text-field
-            v-model="article.title"
-            label="Title"
-            required></v-text-field>
-        <v-textarea
-            v-model="article.content"
-            label="Content"
-            required></v-textarea>
-    </v-form>
-    <v-card-actions>
-        <v-btn
+    <form class="w-full">
+      <div class="flex items-center py-2 w-full">
+        <input class="
+        w-full 
+        border-b 
+        border-teal-500
+        text-gray-700 
+        mr-3 
+        py-1 
+        px-2 
+        leading-tight 
+        focus:outline-none" type="text" placeholder="Title" aria-label="Full name" v-model="article.title">
+        
+      </div>
+    </form>
+        <div
           text
         >
           Cancel
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn
+        </div>
+        <div
           @click="editArticle"
-          text
-          color="primary"
         >
           Update
-        </v-btn>
-      </v-card-actions>
+        </div>
   </div>
 </template>
 <script>
@@ -41,7 +39,7 @@ export default {
   },
   methods: {
     async editArticle(){
-      this.$axios.$patch('articles/'+this.article.id,{
+      this.$axios.patch('articles/'+this.article.id,{
         title:this.article.title,
         content:this.article.content,
       })

@@ -1,33 +1,31 @@
 <template>
   <div class="pt-10">
     <h1>New article</h1>
-    <v-form
-      ref="form"
-    >
-        <v-text-field
-            v-model="title"
-            label="Title"
-            required></v-text-field>
-        <v-textarea
-            v-model="content"
-            label="Content"
-            required></v-textarea>
-    </v-form>
-    <v-card-actions>
-        <v-btn
+    <form class="w-full">
+      <div class="flex items-center py-2 w-full">
+        <input class="
+        w-full 
+        border-b 
+        border-teal-500
+        text-gray-700 
+        mr-3 
+        py-1 
+        px-2 
+        leading-tight 
+        focus:outline-none" type="text" placeholder="Title" aria-label="Full name" v-model="title">
+        
+      </div>
+    </form>
+        <div
           text
         >
           Cancel
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn
+        </div>
+        <div
           @click="submitArticle"
-          text
-          color="primary"
         >
           Submit
-        </v-btn>
-      </v-card-actions>
+        </div>
   </div>
 </template>
 <script>

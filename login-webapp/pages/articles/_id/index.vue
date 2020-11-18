@@ -1,9 +1,18 @@
 <template>
   <div class="pt-10">
-      <h1 class="my-4 ">{{articles.title}}</h1>
-      <nuxt-link :to="'/articles/'+articles.id +'/edit/'" ><v-btn v-if="canEdit">Edit</v-btn></nuxt-link>
-      <p>{{articles.content}}</p>
-      <button >Refresh</button>
+    <div class="grid grid-cols-8">
+      <div class="lg:col-span-2 col-span-1"></div>
+      <div class="lg:col-span-4 col-span-6">
+        <h1 class="my-4 ">{{articles.title}}</h1>
+        <nuxt-link class="my-4" :to="'/articles/'+articles.id +'/edit/'" >
+        <div class="mb-4 button" v-if="canEdit">
+          Edit</div>
+        </nuxt-link>
+        <p>{{articles.content}}</p>
+      </div>
+      <div class="lg:col-span-2 col-span-1"></div>
+    </div>
+      
 
   </div>
 </template>

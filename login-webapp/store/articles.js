@@ -23,16 +23,16 @@ export const actions = {
 
 
     async getAllArticles(context, perPage = 5) {
-    console.log('Getting articles');
-    this.$axios.$get('/articles'+'?perPage='+perPage)
-    .then( (response)=>{
-        context.commit('setArticles',response);
-        context.commit('setPerPage',perPage)
-    })
-    .catch((error)=>{
-        console.log('Todo mal');
-        console.log(error);
-    })
+        console.log('Getting articles');
+        this.$axios.$get('/articles'+'?perPage='+perPage)
+        .then( (response)=>{
+            context.commit('setArticles',response);
+            context.commit('setPerPage',perPage)
+        })
+        .catch((error)=>{
+            console.log('Todo mal');
+            console.log(error);
+        })
     },
 
 
@@ -60,8 +60,14 @@ export const actions = {
 
     
     async getByPage(context, page){
-        if(page>=0 && page<=context.state.articles.last_page){
-            const pageToGet = context.state.articles.links[page].url;
+        const myPage = page;
+        if(myPage>=0 && myPage<=context.state.articles.last_page){
+            console.log("Adentro");
+            console.log(page);
+            const pageObject = context.state.articles.links.find( item =>
+                item.label == page
+            );
+            const pageToGet = pageObject.url;
             this.$axios.$get(pageToGet+'&perPage='+context.state.perPage)
             .then( (response)=>{
                 context.commit('setArticles',response)
