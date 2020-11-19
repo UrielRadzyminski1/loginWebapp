@@ -1,7 +1,7 @@
 <template>
   <div>
       <UserNavbar />
-      <Nuxt class="pt-12" />
+      <Nuxt class="pt-12 min-h-screen bg-gray-100" />
   </div>
 </template>
 <script>

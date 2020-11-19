@@ -4,7 +4,7 @@
       <div @click="toggleMenu" class="button flex items-center h-full">
           {{$auth.user.name}}
       </div>
-      <ul v-if="showMenu" class="absolute right-0 bg-green-200 w-32">
+      <ul v-if="showMenu" class="absolute right-0 bg-green-200 w-40">
         <li
           class="dropdownItem"
           v-for="(item, index) in items"
@@ -18,7 +18,7 @@
 <script>
 export default {
     data: () => ({
-      showMenu:false,
+      showMenu:true,
       items: [
         { title: 'Profile', link :'/user/profile' },
         { title: 'My articles', link :'/user/articles' },

@@ -1,5 +1,17 @@
 <template>
-  <div class="justify-between fixed flex bg-green-400 w-full">
+  <div class="
+  justify-between 
+  fixed flex 
+  bg-green-400 
+  w-full 
+  font-bold 
+  uppercase 
+  text-gray-900
+  text-lg
+  tracking-wider
+  subpixel-antialiased
+  px-4
+  select-none">
       
       <div class="flex">
         <div class="button" @click="$router.push({path: '/'})">Home!</div>
