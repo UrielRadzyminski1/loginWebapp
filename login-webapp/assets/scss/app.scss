@@ -42,7 +42,7 @@ span{
 }
 
 .pagination{
-  @apply flex;
+  @apply flex place-self-center mt-4;
 }
 .paginationActive{
   @apply bg-green-400;

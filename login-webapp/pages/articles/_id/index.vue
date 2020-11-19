@@ -4,11 +4,23 @@
       <div class="lg:col-span-2 col-span-1"></div>
       <div class="lg:col-span-4 col-span-6">
         <h1 class="my-4 ">{{articles.title}}</h1>
-        <nuxt-link class="my-4" :to="'/articles/'+articles.id +'/edit/'" >
-        <div class="mb-4 button" v-if="canEdit">
-          Edit</div>
-        </nuxt-link>
-        <p>{{articles.content}}</p>
+        <span v-if="canEdit" class="
+        my-4 
+        py-2
+        px-4
+        rounded  
+        bg-green-200 
+        hover:bg-green-300
+        cursor-pointer 
+        inline-block" >  
+          <nuxt-link :to="'/articles/'+articles.id +'/edit/'" >
+            Edit
+          </nuxt-link>
+        </span>
+        <br>
+        <span class="my-4 inline-block"><i> Author: {{articles.user.name}}</i></span>
+
+        <p class="mt-4">{{articles.content}}</p>
       </div>
       <div class="lg:col-span-2 col-span-1"></div>
     </div>
