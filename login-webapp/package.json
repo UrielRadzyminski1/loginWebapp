@@ -12,6 +12,7 @@
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.12.2",
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
     "nanoid": "^2.1.11",
     "nuxt": "^2.14.6",
     "vuejs-paginate": "^2.1.0"
