@@ -22,7 +22,7 @@
         <div class="button" @click="$router.push({path: '/articles/new'})" v-if="$auth.hasScope('create articles')">New article</div>
         <div class="button" @click="logout()">Logout</div>
       </div>
-      <div v-else>
+      <div v-else class="inline-flex w-auto">
         <div class="button" @click="$router.push({path: '/login'})">Log in</div>
         <div class="button" @click="$router.push({path: '/register'})">Register</div>
       </div>
